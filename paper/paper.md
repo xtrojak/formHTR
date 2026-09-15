@@ -19,9 +19,6 @@ authors:
   - name: Michael Kuhn
     orcid: 0000-0002-2841-872X
     affiliation: 1
-  - name: Peer Bork
-    orcid: 0000-0002-2627-833X
-    affiliation: 1
 affiliations:
  - name: EMBL, Heidelberg, Germany
    index: 1
@@ -108,7 +105,7 @@ formhtr process-logsheet \
 
 # Author's Contributions
 
-MT wrote the manuscript and developed the software. JG contributed to the software. SP, MK, and KL contributed via conceptual guidance and contributed to the manuscript. PB provided conceptual oversight and funding.
+MT wrote the manuscript and developed the software. JG contributed to the software. SP, MK, and KL contributed via conceptual guidance and contributed to the manuscript.
 
 # AI usage disclosure
 
@@ -116,6 +113,6 @@ No generative AI tools were used in the development of this software, or the wri
 
 # Acknowledgements
 
-This publication was enabled by the support of EMBL member states to the TREC expedition (within the framework of EMBL’s Molecules to Ecosystems Programme 2022-2026) and partially funded by the European Union’s Horizon 2020 research and innovation program (project BIOcean5D with grant agreement No. 101059915). Views and opinions expressed are, however, those of the authors only and do not necessarily reflect those of the European Union. Neither the European Union nor the granting authority can be held responsible for them.
+We thank the late Peer Bork for general supervision of this work. This publication was enabled by the support of EMBL member states to the TREC expedition (within the framework of EMBL’s Molecules to Ecosystems Programme 2022-2026) and partially funded by the European Union’s Horizon 2020 research and innovation program (project BIOcean5D with grant agreement No. 101059915). Views and opinions expressed are, however, those of the authors only and do not necessarily reflect those of the European Union. Neither the European Union nor the granting authority can be held responsible for them.
 
 # References
