@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `process-logsheet` prints `Stats: <ratio> (<matches>:<artefacts>)` instead of a "success ratio".
+
 ### Fixed
 
 - Allow installation on Python 3.12+ by relaxing the Pillow pin from `pillow==9.5.0`.

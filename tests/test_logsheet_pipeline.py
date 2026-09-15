@@ -55,7 +55,7 @@ def test_process_logsheet_to_xlsx_calls_store_csv_when_requested(monkeypatch, tm
     monkeypatch.setattr("formhtr.logsheet.store_results", lambda *args, **kwargs: calls.__setitem__("xlsx", calls["xlsx"] + 1))
     monkeypatch.setattr("formhtr.logsheet.store_results_csv", lambda *args, **kwargs: calls.__setitem__("csv", calls["csv"] + 1))
 
-    ratio = process_logsheet_to_xlsx(
+    stats = process_logsheet_to_xlsx(
         scanned_logsheet_pdf="a.pdf",
         template_pdf="b.pdf",
         config_json="c.json",
@@ -64,7 +64,8 @@ def test_process_logsheet_to_xlsx_calls_store_csv_when_requested(monkeypatch, tm
         store_csv=True,
     )
 
-    assert ratio is not None
+    assert stats is not None
+    assert stats["matches"] == 1
     assert calls == {"xlsx": 0, "csv": 1}
 
 
@@ -88,7 +89,7 @@ def test_process_logsheet_to_xlsx_merges_backside_content(monkeypatch, tmp_path)
     monkeypatch.setattr("formhtr.logsheet.store_results", lambda results, artefacts, output: captured.update({"results": results, "artefacts": artefacts, "output": output}))
     monkeypatch.setattr("formhtr.logsheet.store_results_csv", lambda *args, **kwargs: None)
 
-    ratio = process_logsheet_to_xlsx(
+    stats = process_logsheet_to_xlsx(
         scanned_logsheet_pdf="a.pdf",
         template_pdf="front_template.pdf",
         config_json="front.json",
@@ -99,7 +100,8 @@ def test_process_logsheet_to_xlsx_merges_backside_content(monkeypatch, tmp_path)
         backside_config_json="back.json",
     )
 
-    assert ratio is not None
+    assert stats is not None
+    assert stats["matches"] == 2
     assert len(captured["results"]) == 2
     assert len(captured["artefacts"]["google"]) == 1
     assert len(captured["artefacts"]["amazon"]) == 1

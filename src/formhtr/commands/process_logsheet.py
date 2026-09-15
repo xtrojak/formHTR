@@ -4,6 +4,7 @@ import argparse
 import sys
 
 from formhtr.deps import ensure_system_dependencies
+from formhtr.libs.statistics import format_stats
 from formhtr.logsheet import load_credentials, process_logsheet_to_xlsx
 
 
@@ -73,7 +74,7 @@ def run(args: argparse.Namespace) -> int:
         azure_credentials_path=args.azure,
     )
 
-    ratio = process_logsheet_to_xlsx(
+    stats = process_logsheet_to_xlsx(
         scanned_logsheet_pdf=args.pdf_logsheet,
         template_pdf=args.pdf_template,
         config_json=args.config_file,
@@ -90,8 +91,8 @@ def run(args: argparse.Namespace) -> int:
         alignment_config_path=args.alignment_config,
         backside_alignment_config_path=args.backside_alignment_config,
     )
-    if ratio is not None:
-        print(f"Success ratio: {ratio['ratio']:.3f}")
+    if stats is not None:
+        print(f"Stats: {format_stats(stats)}")
     return 0
 
 

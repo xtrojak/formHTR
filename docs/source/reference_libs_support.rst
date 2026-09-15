@@ -2,7 +2,7 @@
 ========================
 
 Shared helpers that sit alongside the feature packages above: rasterizing PDFs, parsing
-layout JSON, geometry types, success metrics, and debug PDF overlays.
+layout JSON, geometry types, extraction stats, and debug PDF overlays.
 
 .. automodule:: formhtr.libs.pdf_to_image
    :members:
