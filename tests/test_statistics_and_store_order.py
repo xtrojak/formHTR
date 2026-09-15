@@ -17,8 +17,8 @@ def test_compute_stats_handles_zero_artefacts():
     assert stats["matches"] == 2
     assert stats["artefacts"] == 0
     assert stats["ratio"] == 2.0
-    assert format_stats(stats) == "2.000 (2 : 0)"
+    assert format_stats(stats) == "2.000 (2:0)"
 
 
 def test_format_stats_includes_ratio_and_counts():
-    assert format_stats({"matches": 7, "artefacts": 8, "ratio": 0.875}) == "0.875 (7 : 8)"
+    assert format_stats({"matches": 7, "artefacts": 8, "ratio": 0.875}) == "0.875 (7:8)"
