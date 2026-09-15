@@ -109,7 +109,7 @@ MT wrote the manuscript and developed the software. JG contributed to the softwa
 
 # AI usage disclosure
 
-No generative AI tools were used in the development of this software, or the writing of this manuscript. AI tools were used in the preparation of supporting materials, namely setting up and generating the documentation and tests.
+Generative AI assistance was used through the Cursor IDE with automatic agent selection, so individual model names and versions were not recorded. It was used to draft tests and documentation, and during JOSS review to help revise this manuscript and author responses. It was not used to design the extraction pipeline or to write the original manuscript. Human authors reviewed, edited, and validated all AI-assisted outputs and made the core design decisions.
 
 # Acknowledgements
 
