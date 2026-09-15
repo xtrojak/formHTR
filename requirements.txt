@@ -1,6 +1,6 @@
 numpy
 opencv-python
-pillow==9.5.0
+pillow>=9.5
 pdf2image
 pandas
 xlsxwriter

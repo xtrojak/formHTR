@@ -28,7 +28,7 @@ def test_process_logsheet_requires_at_least_one_ocr_credential(monkeypatch):
         )
 
 
-def test_process_logsheet_dispatches_and_prints_ratio(monkeypatch, capsys):
+def test_process_logsheet_dispatches_and_prints_stats(monkeypatch, capsys):
     monkeypatch.setattr(
         "formhtr.commands.process_logsheet.ensure_system_dependencies",
         lambda *_args, **_kwargs: None,
@@ -41,7 +41,7 @@ def test_process_logsheet_dispatches_and_prints_ratio(monkeypatch, capsys):
 
     def fake_process(**kwargs):
         captured.update(kwargs)
-        return {"ratio": 0.875}
+        return {"matches": 7, "artefacts": 8, "ratio": 0.875}
 
     monkeypatch.setattr("formhtr.commands.process_logsheet.process_logsheet_to_xlsx", fake_process)
 
@@ -63,7 +63,7 @@ def test_process_logsheet_dispatches_and_prints_ratio(monkeypatch, capsys):
 
     out = capsys.readouterr().out
     assert code == 0
-    assert "Success ratio: 0.875" in out
+    assert "Stats: 0.875 (7:8)" in out
     assert captured["credentials"] == "CREDENTIALS"
     assert captured["scanned_logsheet_pdf"] == "scan.pdf"
     assert captured["template_pdf"] == "template.pdf"

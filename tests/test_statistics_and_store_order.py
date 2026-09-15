@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from formhtr.libs.processing.store_results import order_results
-from formhtr.libs.statistics import compute_success_ratio
+from formhtr.libs.statistics import compute_stats, format_stats
 
 
 def test_order_results_follows_expected_priority():
@@ -9,11 +9,16 @@ def test_order_results_follows_expected_priority():
     assert order_results(values) == ["inf", "gg", "az"]
 
 
-def test_compute_success_ratio_handles_zero_artefacts():
-    ratio = compute_success_ratio(
+def test_compute_stats_handles_zero_artefacts():
+    stats = compute_stats(
         contents=[["a", {}, None], ["b", {}, None]],
         artefacts={"google": [], "amazon": [], "azure": []},
     )
-    assert ratio["identified"] == 2
-    assert ratio["artefacts"] == 0
-    assert ratio["ratio"] == 2.0
+    assert stats["matches"] == 2
+    assert stats["artefacts"] == 0
+    assert stats["ratio"] == 2.0
+    assert format_stats(stats) == "2.000 (2:0)"
+
+
+def test_format_stats_includes_ratio_and_counts():
+    assert format_stats({"matches": 7, "artefacts": 8, "ratio": 0.875}) == "0.875 (7:8)"

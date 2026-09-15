@@ -1,16 +1,22 @@
-def compute_success_ratio(contents, artefacts):
-    """Compute ratio between number identified regions and extra content
+def compute_stats(contents, artefacts):
+    """Count ROI matches versus OCR artefacts and their ratio.
+
+    The ratio is ``matches / artefacts`` (artefacts of 0 treated as 1 so the
+    value is defined).
 
     Args:
-        contents (list): list of identified regions
-        artefacts (dict): artefact per service
+        contents (list): Identified regions that matched ROI locations.
+        artefacts (dict): Extra OCR hits per service.
 
     Returns:
-        Dict with keys ``identified`` (int), ``artefacts`` (int), ``ratio`` (float).
+        Dict with keys ``matches`` (int), ``artefacts`` (int), ``ratio`` (float).
     """
-    num_of_identified = len(contents)
-    max_artefacts = max([len(items) for items in artefacts.values()])
-    ratio = num_of_identified/max(max_artefacts, 1) # to avoid division by zero
-    return {'identified': num_of_identified, 
-            'artefacts': max_artefacts, 
-            'ratio': ratio}
+    matches = len(contents)
+    artefact_count = max(len(items) for items in artefacts.values())
+    ratio = matches / max(artefact_count, 1)  # avoid division by zero
+    return {"matches": matches, "artefacts": artefact_count, "ratio": ratio}
+
+
+def format_stats(stats):
+    """Format as ``ratio (matches:artefacts)``."""
+    return f"{stats['ratio']:.3f} ({stats['matches']}:{stats['artefacts']})"

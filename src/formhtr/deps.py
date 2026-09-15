@@ -12,6 +12,8 @@ def _install_hint(dep_name: str) -> str:
     if system == "linux":
         if dep_name == "zbar":
             return "apt: sudo apt-get install libzbar0  |  dnf: sudo dnf install zbar"
+        if dep_name == "poppler":
+            return "apt: sudo apt-get install poppler-utils  |  dnf: sudo dnf install poppler-utils"
         return f"apt: sudo apt-get install {dep_name}  |  dnf: sudo dnf install {dep_name}"
     return f"Install {dep_name} using your system package manager."
 
@@ -21,7 +23,7 @@ def check_system_dependencies() -> list[tuple[str, str]]:
 
     Returns:
         List of ``(name, install_hint)`` for each missing tool or library
-        (currently ``qpdf`` and ``zbar``).
+        (currently ``qpdf``, ``zbar``, and ``poppler``).
     """
     missing: list[tuple[str, str]] = []
 
@@ -31,6 +33,9 @@ def check_system_dependencies() -> list[tuple[str, str]]:
     if ctypes.util.find_library("zbar") is None:
         missing.append(("zbar", _install_hint("zbar")))
 
+    if shutil.which("pdfinfo") is None:
+        missing.append(("poppler", _install_hint("poppler")))
+
     return missing
 
 
@@ -38,7 +43,7 @@ def ensure_system_dependencies(required: set[str]) -> None:
     """Raise ``RuntimeError`` if any required dependency is missing.
 
     Args:
-        required: Subset of ``{"qpdf", "zbar"}`` to enforce.
+        required: Subset of ``{"qpdf", "zbar", "poppler"}`` to enforce.
 
     Raises:
         RuntimeError: If a listed dependency is not available.
@@ -53,4 +58,3 @@ def ensure_system_dependencies(required: set[str]) -> None:
         lines.append(f"- {name}: {hint}")
     lines.append("Run `formhtr doctor` for a full dependency report.")
     raise RuntimeError("\n".join(lines))
-

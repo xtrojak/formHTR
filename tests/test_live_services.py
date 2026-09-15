@@ -73,7 +73,7 @@ def test_process_logsheet_to_csv_live_with_ctd_front_and_back(tmp_path):
     credentials = _available_credentials()
 
     output = tmp_path / "ctd_live.csv"
-    ratio = process_logsheet_to_xlsx(
+    stats = process_logsheet_to_xlsx(
         scanned_logsheet_pdf=str(ROOT / "tests/test-data/logsheet/logsheet_ctd.pdf"),
         template_pdf=str(ROOT / "tests/test-data/template/template_ctd_front.pdf"),
         config_json=str(ROOT / "tests/test-data/config/config_ctd_front.json"),
@@ -86,6 +86,6 @@ def test_process_logsheet_to_csv_live_with_ctd_front_and_back(tmp_path):
         store_csv=True,
     )
 
-    assert ratio is not None
+    assert stats is not None
     assert output.exists()
     assert output.stat().st_size > 0

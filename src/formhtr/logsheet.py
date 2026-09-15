@@ -13,7 +13,7 @@ from .libs.processing.align_images import align_images
 from .libs.processing.read_content import process_content
 from .libs.processing.store_results import store_results, store_results_csv
 from .libs.services.call_services import call_services
-from .libs.statistics import compute_success_ratio
+from .libs.statistics import compute_stats
 from .libs.visualise_regions import annotate_pdfs
 from .manual_align import align_page
 
@@ -219,7 +219,7 @@ def process_logsheet_to_xlsx(
     store_csv: bool = False,
     alignment_config_path: str | None = None,
     backside_alignment_config_path: str | None = None,
-) -> float | None:
+) -> dict | None:
     """End-to-end extraction to spreadsheet or CSV, optionally both sides of a scan.
 
     Args:
@@ -240,7 +240,7 @@ def process_logsheet_to_xlsx(
         backside_alignment_config_path: Optional back alignment JSON.
 
     Returns:
-        Dict from ``compute_success_ratio`` (``identified``, ``artefacts``, ``ratio``),
+        Dict from ``compute_stats`` (``matches``, ``artefacts``, ``ratio``),
         or ``None`` if the front side could not be processed.
     """
     checkbox_edges = 0.4 if ugly_checkboxes else 0.2
@@ -287,11 +287,11 @@ def process_logsheet_to_xlsx(
             # backside present but actually a blank page
             pass
 
-    ratio = compute_success_ratio(contents, artefacts)
+    stats = compute_stats(contents, artefacts)
     if not store_csv:
         # store to Excel sheet
         store_results(contents, artefacts, output_xlsx)
     else:
         store_results_csv(contents, artefacts, output_xlsx)
 
-    return ratio
+    return stats
