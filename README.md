@@ -7,20 +7,26 @@ Handwritten text recognition in form documents.
 
 ## Installation
 
+Requires **Python 3.10 or later**.
+
 ### pip
 
 ```bash
 pip install formhtr
 ```
 
-The tool also requires the `zbar` shared library installed (used by `pyzbar`).
-For PDF-related tooling, `qpdf` is also required.
+The tool also requires a few system libraries:
+
+- `zbar` (used by `pyzbar` for processing barcodes)
+- Poppler (`pdfinfo` / `pdftoppm`, used by `pdf2image` to rasterize PDFs)
+- `qpdf` (PDF-related tooling)
 
 System dependencies:
 
-- macOS (Homebrew): `brew install zbar qpdf`
-- Debian/Ubuntu: `sudo apt-get install libzbar0 qpdf`
-- Fedora: `sudo dnf install zbar qpdf`
+- macOS (Homebrew): `brew install zbar qpdf poppler`
+- Debian/Ubuntu: `sudo apt-get install libzbar0 qpdf poppler-utils`
+- Fedora: `sudo dnf install zbar qpdf poppler-utils`
+- conda: `conda install -c conda-forge zbar qpdf poppler`
 
 You can verify runtime requirements with:
 
@@ -152,7 +158,7 @@ DATA=tests/test-data
 #### CLI
 
 ```bash
-# Check qpdf / zbar (no test files required)
+# Check qpdf / zbar / poppler (no test files required)
 formhtr doctor
 
 # Automatic corner alignment payload for front (and optional back) pages
@@ -219,7 +225,7 @@ DATA = Path("tests/test-data")
 from formhtr.deps import check_system_dependencies, ensure_system_dependencies
 
 check_system_dependencies()
-ensure_system_dependencies({"qpdf", "zbar"})
+ensure_system_dependencies({"qpdf", "zbar", "poppler"})
 
 # formhtr.pdf_utils.get_pdf_dimensions
 from formhtr.pdf_utils import get_pdf_dimensions

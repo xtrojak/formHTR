@@ -15,7 +15,7 @@ def register_parser(subparsers: argparse._SubParsersAction) -> argparse.Argument
 def run(_args: argparse.Namespace) -> int:
     missing = check_system_dependencies()
     if not missing:
-        print("All required system dependencies are available: qpdf, zbar.")
+        print("All required system dependencies are available: qpdf, zbar, poppler.")
         return 0
 
     print("Missing system dependencies:")
@@ -29,4 +29,3 @@ def main(argv: list[str] | None = None) -> int:
 
     args = sys.argv[1:] if argv is None else argv
     return cli_main(["doctor", *args])
-
