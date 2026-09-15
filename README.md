@@ -86,7 +86,7 @@ This is done by pressing appropriate control commands.
 * Press `b` to add "Barcode" type to the current ROI.
 * Press `r` or `d` to delete the type from the current ROI.
 * Press `v` to enter the variable name.
-* Press an arrow to navigate through ROIs (only left and right for now).
+* Press `j` and `k` to navigate through ROIs.
 
 Run `formhtr annotate-rois -h` for details.
 
