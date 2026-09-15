@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-09-15
+
 ### Changed
 
 - `process-logsheet` prints `Stats: <ratio> (<matches>:<artefacts>)` instead of a "success ratio".
